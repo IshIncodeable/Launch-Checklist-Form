@@ -24,36 +24,40 @@ window.addEventListener("load", () => {
                   isNaN(cargoMassInput)){
          alert("Fuel Levels and Cargo mass require a numerical input.");
          event.preventDefault();
-      }else {
+      } else {
          fuelLevelInput = Number(fuelLevelInput);
          cargoMassInput = Number(cargoMassInput);
       }
-   
-   
-      console.log("fuel level:", fuelLevelInput, "|| cargoMass:", cargoMassInput );
-      
-      let NotReadyToLaunch;
-      
-      if (fuelLevelInput < 10000 || cargoMassInput > 10000){
-         NotReadyToLaunch = true;
-      } else {NotReadyToLaunch = false} //We have liftOff- GodSpeed
-      
-      if (NotReadyToLaunch){
 
-         document.getElementById("pilotStatus").innerHTML = `Pilot ${pilotnameInput} is ready for launch`;
-         document.getElementById("copilotStatus").innerHTML = `Co-pilot ${copilotnameInput} is ready for launch`;
+      //Updating Shuttle Requirements
+      document.getElementById("pilotStatus").innerHTML = `Pilot ${pilotnameInput} is ready for launch`;
+      document.getElementById("copilotStatus").innerHTML = `Co-pilot ${copilotnameInput} is ready for launch`;
 
          
-         if (fuelLevelInput < 10000) {
-            document.getElementById("faultyItems").style.visibility = "visible";
-            document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
-            document.getElementById("launchStatus").style.color = "red"
-            }
+      if (fuelLevelInput < 10000) {
+         //Make Status Layout Visible
+         document.getElementById("faultyItems").style.visibility = "visible";
+         //Fuel Status Change
+         document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch"
 
+      } else {document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch"}
+         
+      if (cargoMassInput > 10000) {
+         //Make Status Layout Visible
+         document.getElementById("faultyItems").style.visibility = "visible";
+         //Cargo Status Change
+         document.getElementById("cargoStatus").innerHTML = "Cargo Mass has Exceeded Maximum Capacity"
+         
+      } else {document.getElementById("cargoStatus").innerHTML = "Cargo mass is low enough for launch"}
+
+         //LaunchStatus Box Modifications  <h2> 
+      if (fuelLevelInput < 10000 || cargoMassInput > 10000) { //not ready to Launch
+         document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
+         document.getElementById("launchStatus").style.color = "red"
+      } else { //Ready for Launch
+         document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch"
+         document.getElementById("launchStatus").style.color = "green"
       }
-      console.log(document.getElementById("faultyItems").innerHTML)
-      console.log(document.getElementById("pilotStatus").innerHTML)
-      console.log(document.getElementById("copilotStatus").innerHTML)
    });//end of form
 
          
