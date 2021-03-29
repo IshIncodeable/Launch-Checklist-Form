@@ -1,6 +1,30 @@
-// Write your JavaScript code here! 
-
 window.addEventListener("load", () => {
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then((response) => {
+      response.json().then((json) => { //Array of JSON Objects
+
+            //json = [Array of JSON Objects]
+            //choose index by using json[i] 
+            let i = 0;
+            //json[0] = Tattooine data
+
+
+
+            //This block of code shows how to format the HTML once you fetch some planetary JSON!
+            document.getElementById("missionTarget").innerHTML =
+                 `<h2>Mission Destination</h2>
+                  <ol id="planetList">
+                     <li>Name: ${json[i].name}</li>
+                     <li>Diameter: ${json[i].diameter}</li>
+                     <li>Star: ${json[i].star}</li>
+                     <li>Distance from Earth: ${json[i].distance}</li>
+                     <li>Number of Moons: ${json[i].moons}</li>
+                  </ol>
+                  <img src="${json[i].image}">`;   
+      })
+   });
+
+//////////////////////  F   O   R   M  ////////////////////////////
+
    const form = document.querySelector("form");
 
    form.addEventListener("submit", (event) => {
@@ -69,53 +93,11 @@ window.addEventListener("load", () => {
       } else {
          document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch"
          document.getElementById("launchStatus").style.color = "green"
+         document.getElementById("faultyItems").style.visibility = "hidden"
       }
    });//end of form
 
-         
-
 
 }); //end of window block  
-   
 
-/*
-      let NotReadyToLaunch = true;
 
-      let updateRequirements = (documentByID) => {
-            let shuttleStatus = `
-               <ol>
-                  <li id="pilotStatus">Pilot ${pilotnameInput.value} is ready for launch</li>
-                  <li id="copilotStatus">Co-pilot ${copilotnameInput.value} is ready for launch</li>
-                  `;
-
-            if (Number(fuelLevelInput) < 10000) {
-               documentByID.style.visibility = "visible";
-               shuttleStatus += 
-                  `<li id="fuelStatus">Fuel level too low for launch</li>`;
-               
-               launchStatus = document.getElementById('launchStatus'); 
-               launchStatus.innerHTML = "Shuttle not ready for launch";
-               launchStatus.style.color = "red";
-            }
-            documentByID.innerHTML =  shuttleStatus;
-            return documentByID.innerHTML;
-         }
-      if (NotReadyToLaunch) {
-        
-      }
-      let faultyItems = document.getElementById("faultyItems");
-      console.log(updateRequirements(faultyItems));
-      console.log(faultyItems.innerHTML);
-*/
-
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ol>
-<img src="${}">
-*/
